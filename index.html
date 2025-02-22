@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>OpMode Registrar Creator - 5115</title>
+        <title>FTC Error Lookup - 5115</title>
         <link rel="icon" href="images/placeholder.png"  type="image/png"/>
         <link rel="stylesheet" href="styles.css" />
         <link
@@ -73,6 +73,7 @@
             }
             #output {
                 margin-top: 20px;
+                font-size: large;
             }
             pre {
                 background-color: #f4f4f4;
@@ -83,34 +84,76 @@
                 word-wrap: break-word;
             }
         </style>
+        <script>
+            let problems = [
+                {tag: "Null Pointer Exception", cause:"Value has not been initialized. This is usually thrown when you set a value to null and forget to initialize it.", solution:"Initialize the value before runOpMode()"},
+                {tag: "Array Index Out of Bounds", cause:"You are trying to access an index in an array that does not exist.", solution:"Make sure the index you are trying to access is within the bounds of the array."},
+                {tag: "Cannot find hostname", cause:"Your gradle build cannot get wifi access. Therefore not able to download the dependencies needed.", solution:"Make sure you are connected to wifi and try gradle sync again."},
+                {tag: "Stuck in stop",cause:"This happens when your robot stops while in a while loop. The easiest way to fix this is to not use while loops, or use !opMode.isStopRequested() as a condition in the while loop,",solution:"Use !opMode.isStopRequested() as a condition in the while loop. OR no while loops."},
+                {tag:"Hardware Device not found", cause:"The hardware device you are trying to access isn't being found on the robot. This can also happen with I2C devices where it is not connected properly.",solution:"Make sure your configuration is complete and all devices are properly plugged in and named."},
+                
+            ];
+
+            function addProblem() {
+                const tag = document.getElementById('problemTag').value;
+                const cause = document.getElementById('problemCause').value;
+                const solution = document.getElementById('problemSolution').value;
+
+                problems.push({ tag, cause, solution });
+                document.getElementById('problemForm').reset();
+                displayProblems();
+            }
+
+            function searchProblems() {
+                const searchTag = document.getElementById('searchTag').value.toLowerCase();
+                const filteredProblems = problems.filter(problem => problem.tag.toLowerCase().includes(searchTag));
+                if (filteredProblems.length === 0) {
+                    alert('No problems found, please issue an error @ https://github.com/GramGra07/FTC-Error-Lookup/issues');
+                }
+                displayProblems(filteredProblems);
+            }
+
+            function displayProblems(filteredProblems = problems) {
+                const output = document.getElementById('outputText');
+                output.innerHTML = '';
+
+                filteredProblems.forEach(problem => {
+                    output.innerHTML += `<strong>Tag:</strong> ${problem.tag}<br>`;
+                    output.innerHTML += `<strong>Cause:</strong> ${problem.cause}<br>`;
+                    output.innerHTML += `<strong>Solution:</strong> ${problem.solution}<br><br>`;
+                });
+            }
+        </script>
     </head>
 
     <body onload="toRun()">
         <!-- Header Section -->
         <header class="active">
             <div>
-                <h1>OpMode Registrar Creator</h1>
+                <h1>FTC Error Lookup</h1>
                 <br>
                 <p>5115 Escape Velocity</p>
             </div>
         </header>
         <div id="particles-js"></div>
         <main>
+            <!-- <section class="active">
+                <form id="problemForm">
+                    <label for="problemTag">Problem Tag:</label>
+                    <input type="text" id="problemTag" name="problemTag" required />
+                    <label for="problemCause">Cause:</label>
+                    <input type="text" id="problemCause" name="problemCause" required />
+                    <label for="problemSolution">Solution:</label>
+                    <input type="text" id="problemSolution" name="problemSolution" required />
+                    <button type="button" onclick="addProblem()">Add Problem</button>
+                </form>
+            </section> -->
+
             <section class="active">
-                <form id="dataForm">
-                    <label for="selector2">OpModeType:</label>
-                    <select id="selector2" name="selector2" required>
-                        <option value="autonomous">Autonomous</option>
-                        <option value="teleop">TeleOp</option>
-                    </select>
-                    <label for="inputList">Classes (comma-seperated):</label>
-                    <input type="text" id="servoList" name="servoList" required />
-                    <label for="selector">Language:</label>
-                    <select id="selector" name="selector" required>
-                        <option value="Java">Java</option>
-                        <option value="Kotlin">Kotlin</option>
-                    </select>
-                    <button type="button" onclick="generateData()">Generate Data</button>
+                <form id="searchForm">
+                    <label for="searchTag">Search:</label>
+                    <input type="text" id="searchTag" name="searchTag" />
+                    <button type="button" onclick="searchProblems()">Search</button>
                 </form>
             </section>
 

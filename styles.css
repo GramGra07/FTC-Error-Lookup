@@ -93,7 +93,7 @@ h2 {
 }
 
 p {
-    font-size: 1.2em;
+    font-size: 2em;
     color: #555;
 }
 
@@ -109,45 +109,6 @@ li {
 a:hover {
     transform: scale(1.2);
 }
-
-.portfolio-images {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1em;
-}
-
-.portfolio-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 1em;
-    transition: transform 0.3s ease-in-out;
-}
-
-.portfolio-image img {
-    width: 100%;
-    height: 100%;
-    object-fit:fill;
-    object-position: center;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.portfolio-image:hover {
-    transform: scale(1.2);
-}
-
-.about-me {
-    margin-top: 2em;
-    text-align: justify;
-    font-size: 1.2em;
-}
-
-.contact-info {
-    margin-top: 2em;
-}
-
 .footer {
     background: #333;
     color: #fff;
