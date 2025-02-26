@@ -91,7 +91,7 @@
                 {tag: "Cannot find hostname", cause:"Your gradle build cannot get wifi access. Therefore not able to download the dependencies needed.", solution:"Make sure you are connected to wifi and try gradle sync again."},
                 {tag: "Stuck in stop",cause:"This happens when your robot stops while in a while loop. The easiest way to fix this is to not use while loops, or use !opMode.isStopRequested() as a condition in the while loop,",solution:"Use !opMode.isStopRequested() as a condition in the while loop. OR no while loops."},
                 {tag:"Hardware Device not found", cause:"The hardware device you are trying to access isn't being found on the robot. This can also happen with I2C devices where it is not connected properly.",solution:"Make sure your configuration is complete and all devices are properly plugged in and named."},
-                
+                {tag:"Roadrunner Heading Randomly Stops", cause:"This is a bug in the IMU software, when you use a BHI it will randomly stop tracking.",solution:"Use a BNO055 IMU instead."},
             ];
 
             function addProblem() {
