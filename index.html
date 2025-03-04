@@ -92,6 +92,9 @@
                 {tag: "Stuck in stop",cause:"This happens when your robot stops while in a while loop. The easiest way to fix this is to not use while loops, or use !opMode.isStopRequested() as a condition in the while loop,",solution:"Use !opMode.isStopRequested() as a condition in the while loop. OR no while loops."},
                 {tag:"Hardware Device not found", cause:"The hardware device you are trying to access isn't being found on the robot. This can also happen with I2C devices where it is not connected properly.",solution:"Make sure your configuration is complete and all devices are properly plugged in and named."},
                 {tag:"Roadrunner Heading Randomly Stops", cause:"This is a bug in the IMU software, when you use a BHI it will randomly stop tracking.",solution:"Use a BNO055 IMU instead."},
+                {tag:"org.gradle.internal.event.ListenerNotificationException: Failed to notify project evaluation listener."},
+                {tag:"MissingFormatArgumentException", cause:"You are trying to format a string with a placeholder but not providing the value for the placeholder.",solution:"Make sure you provide the value for the placeholder format in your telemetry."},
+                {tag:"A build operation failed\nCould not read workspace metadata from ", cause:"This is a bug in the gradle build system. It is usually caused by a corrupted workspace.",solution:"Delete the .gradle folder in your computer and try syncing again."},
             ];
 
             function addProblem() {
